@@ -1,4 +1,4 @@
-package com.zb.tablereservation.entity;
+package com.zb.tablereservation.common.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,6 +18,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date", nullable = false, updatable = false)
