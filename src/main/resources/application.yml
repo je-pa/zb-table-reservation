@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: zb-table-reservation
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    defer-datasource-initialization: true
+  jwt:
+    secret: ZGF5b25lLXNwcmluZy1ib290LWRpdmlkZW5kLXByb2plY3QtdHV0b3JpYWwtand0LXNlY3JldC1rZXkK
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/reserve?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: reserve
+    password: reserve
