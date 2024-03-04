@@ -1,0 +1,20 @@
+### 회원가입
+POST http://localhost:8080/auth/signup
+Content-Type: application/json
+
+{
+  "name": "aa",
+  "userId": "idaap",
+  "password": "paaa",
+  "phoneNumber": "010-7777-7777",
+  "role": "ROLE_PARTNER"
+}
+
+### 로그인
+POST http://localhost:8080/auth/signin
+Content-Type: application/json
+
+{
+  "userId": "idaa",
+  "password": "paaa"
+}

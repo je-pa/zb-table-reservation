@@ -14,10 +14,12 @@ import org.springframework.stereotype.Service;
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return new CustomUserDetails(userRepository.findByUserId(username)
-                .orElseThrow(()->new UsernameNotFoundException(
-                        ExceptionCode.USER_NOT_FOUND.getMessage())));
+                                    .orElseThrow(()->new UsernameNotFoundException(
+                                        ExceptionCode.USER_NOT_FOUND.getMessage()
+                                    )));
     }
 }
