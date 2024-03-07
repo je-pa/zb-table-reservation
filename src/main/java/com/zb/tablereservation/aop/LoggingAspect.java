@@ -30,12 +30,12 @@ public class LoggingAspect {
             "|| isReservationController()" +
             "|| isReviewController()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        logger.info("Around before: " + "${joinPoint.signature.name} ${joinPoint.args[0]}");
+        logger.info("Around before: {} {}", joinPoint.getSignature().getName(), joinPoint.getArgs()[0]);
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         Object result = joinPoint.proceed();
         stopWatch.stop();
-        logger.info("Around after: " + "${joinPoint.signature.name} ${joinPoint.args[0]} ${stopWatch.lastTaskTimeMillis}");
-        return result;
+        logger.info("Around after: {} {} {}ms", joinPoint.getSignature().getName(), joinPoint.getArgs()[0], stopWatch.getTotalTimeMillis());
+         return result;
     }
 }

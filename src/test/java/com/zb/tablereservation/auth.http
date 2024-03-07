@@ -10,11 +10,14 @@ Content-Type: application/json
   "role": "ROLE_PARTNER"
 }
 
+### eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcCIsInJvbGVzIjpbIlJPTEVfUEFSVE5FUiJdLCJpYXQiOjE3MDk3MzE4MTcsImV4cCI6MTcwOTczNTQxN30.42VdccZ0OzdO6XKY1zP7YhZH8dVJkYdaJOnnM8R__jU
+
+
 ### 로그인
 POST http://localhost:8080/auth/signin
 Content-Type: application/json
 
 {
-  "userId": "idaa",
+  "userId": "idaap",
   "password": "paaa"
 }

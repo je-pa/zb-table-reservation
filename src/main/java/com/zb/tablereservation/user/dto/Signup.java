@@ -26,11 +26,11 @@ public class Signup {
 
         public User toEntity() {
             return User.builder()
-                    .name(name)
-                    .userId(userId)
-                    .password(password)
-                    .phoneNumber(phoneNumber)
-                    .role(Role.valueOf(role))
+                    .name(this.name)
+                    .userId(this.userId)
+                    .password(this.password)
+                    .phoneNumber(this.phoneNumber)
+                    .role(Role.valueOf(this.role))
                     .build();
         }
     }

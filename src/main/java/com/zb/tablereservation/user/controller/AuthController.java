@@ -2,7 +2,7 @@ package com.zb.tablereservation.user.controller;
 
 import com.zb.tablereservation.user.dto.Signin;
 import com.zb.tablereservation.user.dto.Signup;
-import com.zb.tablereservation.user.service.UserServiceImpl;
+import com.zb.tablereservation.user.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
-    private final UserServiceImpl userService;
+    private final AuthService userService;
 
     /**
      * 회원가입을 한다.

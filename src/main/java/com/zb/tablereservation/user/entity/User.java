@@ -16,14 +16,19 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends BaseEntity {
+    // 사용자 이름
     private String name;
 
+    // 사용자 아이디
     private String userId;
 
+    // 비밀번호
     private String password;
 
+    // 전화번호
     private String phoneNumber;
 
+    // 권한
     @Enumerated(EnumType.STRING)
     private Role role;
 }
