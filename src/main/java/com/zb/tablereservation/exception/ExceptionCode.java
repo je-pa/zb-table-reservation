@@ -12,6 +12,8 @@ public enum ExceptionCode {
 
     // NOT_FOUND
     USER_NOT_FOUND(404, "유저를 찾지 못했습니다."),
+    STORE_NOT_FOUND(404, "매장을 찾지 못했습니다."),
+    RESERVATION_NOT_FOUND(404, "예약을 찾지 못했습니다."),
 
     // Conflict
     USER_ID_CONFLICT(409, "이미 존재하는 사용자 아이디입니다.");
