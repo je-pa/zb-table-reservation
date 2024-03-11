@@ -4,12 +4,17 @@ import com.zb.tablereservation.reservation.entity.Reservation;
 import com.zb.tablereservation.reservation.type.ReservationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
-public class UpdateReservationResponse {
+@Getter
+public class ReservationResponse {
+    // id
+    private Long reservationId;
+
     // 예약 일시
     private LocalDateTime reserveDatetime;
 
@@ -31,11 +36,12 @@ public class UpdateReservationResponse {
     // 예약매장
     private Long storeId;
 
-    public static UpdateReservationResponse fromEntity(Reservation entity){
-        return UpdateReservationResponse.builder()
+    public static ReservationResponse fromEntity(Reservation entity){
+        return ReservationResponse.builder()
+                .reservationId(entity.getId())
                 .reserveDatetime(entity.getReserveDatetime())
                 .visitedCheckDatetime(entity.getVisitedCheckDatetime())
-                .reservationStatus(entity.getReservationStatus())
+                .reservationStatus(entity.getReserveStatus())
                 .approveDatetime(entity.getApproveDatetime())
                 .rejectDatetime(entity.getRejectDatetime())
                 .userId(entity.getUser().getId())

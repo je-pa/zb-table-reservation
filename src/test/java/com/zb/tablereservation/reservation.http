@@ -1,0 +1,35 @@
+###
+POST http://localhost:8080/reservation
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcHUxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTcxMDA4NjU2NCwiZXhwIjoxNzEwMDkwMTY0fQ.Pr7dKjNpcYRGnW8AcYGzVUJjtgA_dfxRHIyddrt-r7E
+
+{
+  "reserveDatetime": "2024-03-12T23:59:59",
+  "storeId": "1"
+
+}
+
+###
+GET http://localhost:8080/reservation?storeId=1&date=2024-03-13
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcCIsInJvbGVzIjpbIlJPTEVfUEFSVE5FUiJdLCJpYXQiOjE3MTAxNTQxMTYsImV4cCI6MTcxMDE1NzcxNn0.bvblaoyHUog9fVpj2a3lhp0Yif4uGmZzcyDdirgplnA
+
+###
+PUT http://localhost:8080/reservation/1/reject
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcCIsInJvbGVzIjpbIlJPTEVfUEFSVE5FUiJdLCJpYXQiOjE3MTAwODc2NDIsImV4cCI6MTcxMDA5MTI0Mn0.rr-I9V6goDOGky_KsQcMtT_7iUtUUipfufTsJCCB9jY
+
+###
+PUT http://localhost:8080/reservation/1/approve
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcCIsInJvbGVzIjpbIlJPTEVfUEFSVE5FUiJdLCJpYXQiOjE3MTAwODc2NDIsImV4cCI6MTcxMDA5MTI0Mn0.rr-I9V6goDOGky_KsQcMtT_7iUtUUipfufTsJCCB9jY
+
+###
+PUT http://localhost:8080/reservation/1/arrive
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcHUxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTcxMDA4NjU2NCwiZXhwIjoxNzEwMDkwMTY0fQ.Pr7dKjNpcYRGnW8AcYGzVUJjtgA_dfxRHIyddrt-r7E
+
+###
+PUT http://localhost:8080/reservation/1/complete
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcHUxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTcxMDA4NjU2NCwiZXhwIjoxNzEwMDkwMTY0fQ.Pr7dKjNpcYRGnW8AcYGzVUJjtgA_dfxRHIyddrt-r7E
