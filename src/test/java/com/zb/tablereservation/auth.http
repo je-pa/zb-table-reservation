@@ -3,21 +3,28 @@ POST http://localhost:8080/auth/signup
 Content-Type: application/json
 
 {
-  "name": "aa",
-  "userId": "idaap",
+  "name": "aauser",
+  "userId": "idaapu1",
   "password": "paaa",
   "phoneNumber": "010-7777-7777",
-  "role": "ROLE_PARTNER"
+  "role": "ROLE_USER"
 }
 
-### eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcCIsInJvbGVzIjpbIlJPTEVfUEFSVE5FUiJdLCJpYXQiOjE3MDk3MzE4MTcsImV4cCI6MTcwOTczNTQxN30.42VdccZ0OzdO6XKY1zP7YhZH8dVJkYdaJOnnM8R__jU
-
-
-### 로그인
+### 로그인 - 파트너
 POST http://localhost:8080/auth/signin
 Content-Type: application/json
 
 {
   "userId": "idaap",
+  "password": "paaa"
+}
+
+
+### 로그인 - 유저
+POST http://localhost:8080/auth/signin
+Content-Type: application/json
+
+{
+  "userId": "idaapu1",
   "password": "paaa"
 }
