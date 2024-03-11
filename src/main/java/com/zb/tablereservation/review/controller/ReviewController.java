@@ -49,7 +49,7 @@ public class ReviewController {
      * @return 업데이터된 리뷰의 정보를 반환한다.
      */
     @PutMapping("")
-    @PreAuthorize("hasAnyRole('USER','PARTNER')")
+    @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<UpdateReview.Response> update(
             @RequestBody UpdateReview.Request request) {
         return ResponseEntity.ok(reviewService.update(request));
