@@ -4,9 +4,7 @@ import com.zb.tablereservation.common.entity.BaseEntity;
 import com.zb.tablereservation.reservation.entity.Reservation;
 import com.zb.tablereservation.review.dto.UpdateReview;
 import com.zb.tablereservation.review.type.StarScore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -18,6 +16,7 @@ import lombok.experimental.SuperBuilder;
 public class Review extends BaseEntity {
 
     //별점
+    @Enumerated(EnumType.STRING)
     private StarScore starScore;
 
     // 리뷰 내용

@@ -1,0 +1,33 @@
+###
+POST http://localhost:8080/review/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcHUxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTcxMDE2MDc3MCwiZXhwIjoxNzEwMTY0MzcwfQ.lJjpHIEP_ePpXJ9o3ypoibxRfFWk31lrGudgICrsBgc
+
+{
+  "starScore": "FOUR_STAR",
+  "content": "리뷰",
+  "reservationId": "2"
+
+}
+
+###
+GET http://localhost:8080/review/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcHUxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTcxMDE2MDc3MCwiZXhwIjoxNzEwMTY0MzcwfQ.lJjpHIEP_ePpXJ9o3ypoibxRfFWk31lrGudgICrsBgc
+
+###
+PUT http://localhost:8080/review
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcHUxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTcxMDE2MDc3MCwiZXhwIjoxNzEwMTY0MzcwfQ.lJjpHIEP_ePpXJ9o3ypoibxRfFWk31lrGudgICrsBgc
+
+{
+  "id": "1",
+  "starScore": "FIVE_STAR",
+  "content": "리뷰수정"
+
+}
+
+###
+DELETE http://localhost:8080/review/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcHUxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTcxMDE2MDc3MCwiZXhwIjoxNzEwMTY0MzcwfQ.lJjpHIEP_ePpXJ9o3ypoibxRfFWk31lrGudgICrsBgc
