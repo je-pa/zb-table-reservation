@@ -1,0 +1,42 @@
+### 생성
+POST http://localhost:8080/store
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcHUxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTcxMDA4NjUwOCwiZXhwIjoxNzEwMDkwMTA4fQ.XwXF_dIwWXrIMZUqapYZoSNzukyJvtRakklIWv8S2C0
+
+{
+  "managerId": "1",
+  "storeName": "aaa",
+  "address": "주소생성1",
+  "latitude": "1",
+  "longitude": "1",
+  "description": "상점생성1"
+}
+
+
+### detail
+GET http://localhost:8080/store/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcCIsInJvbGVzIjpbIlJPTEVfUEFSVE5FUiJdLCJpYXQiOjE3MDk4ODYyMTEsImV4cCI6MTcwOTg4OTgxMX0.IVvkHVetQv1xV2yMRuWlyAR1ruTbrAwgt0RvDkh4n0M
+
+
+### list
+GET http://localhost:8080/store/list?sortType=STAR_SCORE_ASC
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcCIsInJvbGVzIjpbIlJPTEVfUEFSVE5FUiJdLCJpYXQiOjE3MDk4ODYyMTEsImV4cCI6MTcwOTg4OTgxMX0.IVvkHVetQv1xV2yMRuWlyAR1ruTbrAwgt0RvDkh4n0M
+
+### 수정
+PUT http://localhost:8080/store
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcCIsInJvbGVzIjpbIlJPTEVfUEFSVE5FUiJdLCJpYXQiOjE3MDk3NDAxNjcsImV4cCI6MTcwOTc0Mzc2N30.ZVll5JfsOUXTJWBCemzXViEZFTcslhBn6fkiAeLia3E
+
+{
+  "storeId": "1",
+  "storeName": "상점이름수정1",
+  "address": "주소수정1",
+  "latitude": "10.11",
+  "longitude": "10.11",
+  "description": "상점수정1"
+}
+
+### 삭제
+DELETE http://localhost:8080/store/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpZGFhcCIsInJvbGVzIjpbIlJPTEVfUEFSVE5FUiJdLCJpYXQiOjE3MDk3NDAxNjcsImV4cCI6MTcwOTc0Mzc2N30.ZVll5JfsOUXTJWBCemzXViEZFTcslhBn6fkiAeLia3E
+

@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.*;
 public class StoreController {
     private final StoreService storeService;
 
+    /**
+     * 파트너가 매장을 생성한다.
+     * @param request 매장 정보를 받아온다.
+     * @return 생성된 매장 정보를 반환한다.
+     */
     @PostMapping("")
     @PreAuthorize("hasRole('PARTNER')")
     public ResponseEntity<CreateStore.Response> create(
@@ -24,6 +29,11 @@ public class StoreController {
         return ResponseEntity.ok(storeService.create(request));
     }
 
+    /**
+     * 하나의 매장 상세정보 확인
+     * @param storeId 매장 아이디
+     * @return 매장아이디에 해당하는 상세 정보를 반환한다.
+     */
     @GetMapping("/{storeId}")
     public ResponseEntity<StoreDetailsResponse> readDetails(
             @PathVariable Long storeId){
@@ -31,10 +41,13 @@ public class StoreController {
     }
 
     /**
-     *
-     * 요청예시: /list?page=0&size=10&sort=id,desc
-     * @param
-     * @return
+     * 매장리스트를 조회한다.
+     * @param page 페이지 넘버
+     * @param size 한 페이지에서 볼 매장 개수
+     * @param sortType 정렬기준
+     * @param curLatitude 현재 위도
+     * @param curLongitude 현재 경도
+     * @return 페이지에관한 정보와 해당하는 페이지에 대한 item인 매장 리스트를 볼 수 있다.
      */
     @GetMapping("/list")
     public ResponseEntity<Page<StoreListResponse>> readList(
@@ -49,6 +62,16 @@ public class StoreController {
         ));
     }
 
+    /**
+     * 매장 이름을 검색해서 매장리스트를 조회한다.
+     * @param page 페이지 넘버
+     * @param size 한 페이지에서 볼 매장 개수
+     * @param sortType 정렬기준
+     * @param curLatitude 현재 위도
+     * @param curLongitude 현재 경도
+     * @param name 매장이름 검색 키워드
+     * @return
+     */
     @GetMapping("/search")
     public ResponseEntity<Page<StoreListResponse>> readListByName(
             @RequestParam(defaultValue = "0") int page,
@@ -65,6 +88,12 @@ public class StoreController {
         ));
     }
 
+    /**
+     * 매장 정보를 파트너가 수정한다.
+     * 매장 매니저와 로그인유저가 일치해야한다.
+     * @param request 수정할 정보를 담아온다.
+     * @return 수정된 정보를 반환한다.
+     */
     @PutMapping("")
     @PreAuthorize("hasRole('PARTNER')")
     public ResponseEntity<UpdateStore.Response> update(
@@ -72,6 +101,12 @@ public class StoreController {
         return ResponseEntity.ok(storeService.update(request));
     }
 
+    /**
+     * 매장 정보를 파트너가 삭제한다
+     * 매장 매니저와 로그인 유저가 일치해야한다.
+     * @param storeId 삭제할 매장의 id값을 받는다.
+     * @return 삭제된 매장의 id값을 반환한다.
+     */
     @DeleteMapping("/{storeId}")
     @PreAuthorize("hasRole('PARTNER')")
     public ResponseEntity<DeleteStoreResponse> delete(

@@ -32,7 +32,7 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
             " , (6371 * acos(cos(radians(:latitude)) * cos(radians(s.latitude)) * cos(radians(s.longitude) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(s.latitude)))) AS distance " +
             " FROM store s " +
             " INNER JOIN user u ON s.manager_id = u.id" +
-            " WHERE storeName = :name", nativeQuery = true)
+            " WHERE storeName = LIKE %:name%", nativeQuery = true)
     Page<StoreProjection> findByNativeProjection(@Param("latitude") Double latitude, @Param("longitude") Double longitude, Pageable pageable,String name);
 
 }

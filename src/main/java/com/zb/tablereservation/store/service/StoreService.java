@@ -61,7 +61,7 @@ public class StoreService {
     private void verifyManager(Long managerId) {
         if(getCurrentUser().getId().equals(managerId)){
             throw new RuntimeException(
-                    ExceptionCode.USER_MANAGER_MISMATCH.getMessage());
+                    ExceptionCode.LOGIN_USER_MANAGER_MISMATCH.getMessage());
         }
     }
 
