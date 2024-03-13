@@ -4,7 +4,6 @@ import com.zb.tablereservation.common.entity.BaseEntity;
 import com.zb.tablereservation.reservation.type.ReservationStatus;
 import com.zb.tablereservation.store.entity.Store;
 import com.zb.tablereservation.user.entity.User;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.*;
 import lombok.*;
 
