@@ -21,7 +21,7 @@ public class CreateReservation {
         public Reservation toEntity(){
             return Reservation.builder()
                     .reserveDatetime(reserveDatetime)
-                    .reservationStatus(ReservationStatus.REQUEST)
+                    .reservationStatus(ReservationStatus.REQUESTED)
                     .build();
         }
     }
