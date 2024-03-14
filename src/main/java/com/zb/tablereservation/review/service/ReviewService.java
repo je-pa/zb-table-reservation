@@ -34,7 +34,7 @@ public class ReviewService {
             throw new RuntimeException(ExceptionCode.WRITE_REVIEW_PERMISSION_DENIED.getMessage());
         }
         if(!reservation.getReserveStatus().name().equals(ReservationStatus.COMPLETED.name())){
-            throw new RuntimeException(ExceptionCode.REVIEW_NOT_AVAILABLE_STATE.getMessage());
+            throw new RuntimeException(ExceptionCode.REVIEW_NOT_AVAILABLE_STATUS.getMessage());
         }
         Review review = reviewRequest.toEntity();
         review.setReservation(reservation);
