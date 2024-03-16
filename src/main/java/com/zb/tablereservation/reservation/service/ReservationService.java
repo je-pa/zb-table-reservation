@@ -5,7 +5,7 @@ import com.zb.tablereservation.reservation.dto.CreateReservation;
 import com.zb.tablereservation.reservation.dto.ReservationResponse;
 import com.zb.tablereservation.reservation.entity.Reservation;
 import com.zb.tablereservation.reservation.repository.ReservationRepository;
-import com.zb.tablereservation.reservation.type.ReservationStatus;
+import com.zb.tablereservation.reservation.status.*;
 import com.zb.tablereservation.security.util.MySecurityUtil;
 import com.zb.tablereservation.store.entity.Store;
 import com.zb.tablereservation.store.repository.StoreRepository;
@@ -26,79 +26,60 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final StoreRepository storeRepository;
     private final UserRepository userRepository;
-    private final Long RESERVATION_LIMIT_MINUTES = 10L;
-    private final Long ARRIVE_LIMIT_MINUTES = 10L;
 
     public CreateReservation.Response createReservation(CreateReservation.Request request) {
-        if(!isAvailableTimeBefore(request.getReserveDatetime(), RESERVATION_LIMIT_MINUTES)){
-            throw new RuntimeException(ExceptionCode.RESERVATION_NOT_AVAILABLE_TIME.getMessage());
-        }
         Reservation reservation = request.toEntity();
         reservation.setStore(getStoreById(request.getStoreId()));
         reservation.setUser(getCurrentUser());
-        reservation.setReserveStatus(ReservationStatus.REQUEST);
 
-        Reservation savedReservation = reservationRepository.save(reservation);
-
-        return CreateReservation.Response.fromEntity(savedReservation);
+        return CreateReservation.Response.fromEntity(
+                updateReservationStatus(
+                        new RequestedStatusUpdater(
+                                reservation, getCurrentUser().getId())));
     }
 
     public Page<ReservationResponse> findAllByStoreId(Long storeId, Pageable pageable, LocalDate date) {
         Store store = getStoreById(storeId);
         verifyManager(store.getManager().getId());
+
         LocalDateTime end = date.plusDays(1).atStartOfDay();
         LocalDateTime start = end.minusDays(1);
-        return reservationRepository.findAllByStoreAndReserveDatetimeBetween(store, pageable, start, end).map(ReservationResponse::fromEntity);
+
+        return reservationRepository
+                .findAllByStoreAndReserveDatetimeBetween(store, pageable, start, end)
+                .map(ReservationResponse::fromEntity);
     }
 
     public ReservationResponse approveReservation(Long id) {
-        verifyManager(getReservationById(id).getStore().getId());
-        Reservation reservation = getReservationById(id);
-        if(!reservation.getReserveStatus().name().equals(ReservationStatus.REQUEST.name())){
-            throw new RuntimeException(ExceptionCode.APPROVE_NOT_AVAILABLE_STATE.getMessage());
-        }
         return ReservationResponse.fromEntity(
-                updateReservationStatus(reservation, ReservationStatus.APPROVED));
+                updateReservationStatus(
+                        new ApproveStatusUpdater(
+                                getReservationById(id), getCurrentUser().getId())));
     }
 
     public ReservationResponse rejectReservation(Long id) {
-        verifyManager(getReservationById(id).getStore().getId());
-        Reservation reservation = getReservationById(id);
-        if(!reservation.getReserveStatus().name().equals(ReservationStatus.REQUEST.name())){
-            throw new RuntimeException(ExceptionCode.REJECT_NOT_AVAILABLE_STATE.getMessage());
-        }
-
         return ReservationResponse.fromEntity(
-                updateReservationStatus(reservation, ReservationStatus.REJECTED));
+                updateReservationStatus(
+                        new RejectStatusUpdater(
+                                getReservationById(id), getCurrentUser().getId())));
     }
 
     public ReservationResponse arriveReservation(Long id) {
-        Reservation reservation = getReservationById(id);
-        if(!isAvailableTimeBefore(
-                reservation.getReserveDatetime(), ARRIVE_LIMIT_MINUTES)){
-            throw new RuntimeException(
-                    ExceptionCode.RESERVATION_NOT_AVAILABLE_TIME.getMessage());
-        }
-        if(!reservation.getReserveStatus().name().equals(ReservationStatus.APPROVED.name())){
-            throw new RuntimeException(ExceptionCode.REJECT_NOT_AVAILABLE_STATE.getMessage());
-        }
         return ReservationResponse.fromEntity(
-                updateReservationStatus(reservation, ReservationStatus.ARRIVED));
+                updateReservationStatus(
+                        new ArriveStatusUpdater(
+                                getReservationById(id), getCurrentUser().getId())));
     }
 
     public ReservationResponse completeReservation(Long id) {
-        Reservation reservation = getReservationById(id);
-        if(!reservation.getReserveStatus().name().equals(ReservationStatus.REQUEST.name())){
-            throw new RuntimeException(ExceptionCode.REJECT_NOT_AVAILABLE_STATE.getMessage());
-        }
         return ReservationResponse.fromEntity(
-                updateReservationStatus(reservation, ReservationStatus.COMPLETED));
+                updateReservationStatus(
+                        new CompleteStatusUpdater(
+                                getReservationById(id), getCurrentUser().getId())));
     }
 
-    private Reservation updateReservationStatus(Reservation reservation, ReservationStatus status) {
-        reservation.setReserveStatus(status);
-
-        return reservationRepository.save(reservation);
+    private Reservation updateReservationStatus(ReservationStatusUpdater updater) {
+        return reservationRepository.save(updater.updateStateTemplateMethod());
     }
 
     private Reservation getReservationById(Long id){
@@ -117,11 +98,6 @@ public class ReservationService {
         return userRepository.findByUserId(MySecurityUtil.getCustomUserDetails().getUsername())
                 .orElseThrow(()-> new RuntimeException(
                         ExceptionCode.USER_NOT_FOUND.getMessage()));
-    }
-
-    public boolean isAvailableTimeBefore(LocalDateTime reservationDateTime, Long limitTime) {
-        return LocalDateTime.now().isBefore(
-                reservationDateTime.minusMinutes(limitTime));
     }
 
     private void verifyManager(Long managerId) {
