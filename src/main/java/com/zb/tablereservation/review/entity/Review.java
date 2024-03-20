@@ -4,6 +4,7 @@ import com.zb.tablereservation.common.entity.BaseEntity;
 import com.zb.tablereservation.reservation.entity.Reservation;
 import com.zb.tablereservation.review.dto.UpdateReview;
 import com.zb.tablereservation.review.type.StarScore;
+import com.zb.tablereservation.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -21,6 +22,13 @@ public class Review extends BaseEntity {
 
     // 리뷰 내용
     private String content;
+
+    // 리뷰자
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id")
+    @ToString.Exclude
+    @Setter
+    private User reviewer;
 
     // 예약 id
     @OneToOne
